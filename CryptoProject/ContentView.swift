@@ -2,20 +2,25 @@
 //  ContentView.swift
 //  CryptoProject
 //
-//  Created by AK on 5/4/24.
+//  Created by Abdul Kareem on 5/4/24.
 //
 
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationView {
+        
+            VStack {
+                Image(systemName: "globe")
+                    .imageScale(.large)
+                    .foregroundColor(.accentColor)
+                Text("Hello, world!")
+                    .foregroundColor(Color.theme.red)
+            }
+            .padding()
         }
-        .padding()
+        
     }
 }
 
