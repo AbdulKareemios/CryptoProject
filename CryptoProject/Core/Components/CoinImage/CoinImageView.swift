@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-
-
 struct CoinImageView: View {
     
     @StateObject var vm: CoinImageViewModel
@@ -40,5 +38,6 @@ struct CoinImageView_Previews: PreviewProvider {
         CoinImageView(coin: dev.coin)
             .padding()
             .previewLayout(.sizeThatFits)
+            
     }
 }

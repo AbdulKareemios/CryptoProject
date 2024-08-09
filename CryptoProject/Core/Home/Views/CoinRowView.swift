@@ -11,6 +11,7 @@ struct CoinRowView: View {
     
     let coin: CoinModel
     let showHoldingsColumn: Bool
+    
     var body: some View {
         
         HStack(spacing: 0) {
@@ -26,12 +27,12 @@ struct CoinRowView: View {
 }
 
 struct CoinRowView_Previews: PreviewProvider {
+    
     static var previews: some View {
         CoinRowView(coin: dev.coin,showHoldingsColumn: true)
             .previewLayout(.sizeThatFits)
     }
 }
-
 
 extension CoinRowView {
     

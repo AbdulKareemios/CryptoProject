@@ -14,14 +14,31 @@ class CoinImageService {
     @Published var image: UIImage? = nil
     var imageSubscription: AnyCancellable?
     private let coin: CoinModel
+    private let filemanager = LocalFileManager.instance
+    private let folderName = "coin_images"
+    private let imageName: String
+    
     
     init(coin: CoinModel) {
         self.coin = coin
+        self.imageName = coin.id
         self.getCoinImage()
     }
     
     private func getCoinImage() {
         
+        if let image = filemanager.getImage(imageName: imageName, folderName: folderName) {
+            self.image = image
+            print("retrieved from file")
+        }
+        else {
+            downloadCoinImage()
+        }
+    }
+    private func downloadCoinImage() {
+        
+        
+        print("downloading image now...")
         guard let url = URL(string: coin.image) else {return}
         
         imageSubscription = NetworkingManager.download(url: url)
@@ -29,8 +46,12 @@ class CoinImageService {
                 return UIImage(data: data)
             })
             .sink(receiveCompletion:  NetworkingManager.handleCompletion, receiveValue: {[weak self] (returnedImage) in
-                self?.image = returnedImage
-                self?.imageSubscription?.cancel()
+                guard let strongSelf = self, let downloadedImage = returnedImage else {return}
+                
+                strongSelf.image = downloadedImage
+                strongSelf.imageSubscription?.cancel()
+                strongSelf.filemanager.saveImage(image: downloadedImage, imageName: strongSelf.imageName
+                                                 , folderName: strongSelf.folderName)
             })
     }
 }
