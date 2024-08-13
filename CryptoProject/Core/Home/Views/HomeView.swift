@@ -20,6 +20,7 @@ struct HomeView: View {
             //Content Layer
             VStack {
                 homeHeaderView
+                HomeStatsView(showPortfolio: $showPortfolio)
                 SearchBarView(searchText: $vm.searchText)
                 columnTitles
                 
@@ -32,7 +33,6 @@ struct HomeView: View {
                     portfolioCoinsList
                         .transition(.move(edge: .trailing))
                 }
-                            
                 Spacer(minLength: 0)
             }
         }
@@ -97,7 +97,6 @@ extension HomeView {
             ForEach(vm.portfolioCoins) {coin in
                 CoinRowView(coin: coin, showHoldingsColumn: true)
                     .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
-            
             }
         }
         .listStyle(.plain)

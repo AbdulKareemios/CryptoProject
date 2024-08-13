@@ -119,6 +119,7 @@ struct WalletView: View {
                     Text("CVV: 123")
                         .font(.title)
                         .foregroundColor(.white)
+                        
                     Spacer()
                 }
                 .padding()
